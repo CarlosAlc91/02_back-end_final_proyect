@@ -7,5 +7,8 @@ import env from 'env-var'
 //2. env var obj
 export const envs = {
   //1.
-  PORT: env.get('PORT').required().asPortNumber()
+  PORT: env.get('PORT').required().asPortNumber(),
+  //2.
+  NODE_ENV: env.get('NODE_ENV').required().asString(),
+  DB_URI: env.get('DB_URI').required().asString(),
 }
