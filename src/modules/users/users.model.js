@@ -1,6 +1,7 @@
 //1. imports datatypes and sequelize
 import { DataTypes } from "sequelize"
 import sequelize from '../../config/database/database.js'
+import { encryptedPassword } from "../../config/plugins/encryptedPassword.js"
 //2. model createion
 const User = sequelize.define('users', {
   id: {
@@ -32,7 +33,16 @@ const User = sequelize.define('users', {
     defaultValue: true,
     allowNull: true
   }
-
+  //5. encriptacion de passwords
+}, {
+  hooks: {
+    beforeCreate: async (user) => {
+      //6. ir a config => plugins
+      //7. update password
+      user.password = await encryptedPassword(user.password)
+      //8. go to user.controller
+    }
+  }
 })
 
 //4. go to users.service.js
