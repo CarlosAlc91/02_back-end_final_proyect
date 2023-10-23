@@ -1,6 +1,7 @@
 /* validaciones */
 //1. imports
 import z from 'zod'
+import { extractValidationData } from '../../common/utils/exrtractErrorData.js'
 
 //2. register schema
 const registerUserSchema = z.object({
@@ -23,8 +24,66 @@ const updateUserSchema = z.object({
 
 //5. register validation
 export const validateRegister = (data) => {
+
   const result = registerUserSchema.safeParse(data)
 
+  //7. returning from extractErrorData
+  //8. destructurar e importar de extractErrorData
+  const {
+    hasError,
+    erroMessages,
+    data: userData
+  } = extractValidationData(result)
+
+  //9. return
+  return {
+    hasError,
+    erroMessages,
+    userData
+  }
+
 }
+
+//10. login schema
+export const validateLogin = (data) => {
+
+  const result = loginUserSchema.safeParse(data)
+
+  const {
+    hasError,
+    erroMessages,
+    data: userData
+  } = extractValidationData(result)
+
+  //9. return
+  return {
+    hasError,
+    erroMessages,
+    userData
+  }
+
+}
+
+//11. login schema
+export const validateUpdateUser = (data) => {
+
+  const result = updateUserSchema.safeParse(data)
+
+  const {
+    hasError,
+    erroMessages,
+    data: userData
+  } = extractValidationData(result)
+
+  //9. return
+  return {
+    hasError,
+    erroMessages,
+    userData
+  }
+
+}
+
+//12. go to users.controller
 
 //6. create common folder in src
