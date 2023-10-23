@@ -23,5 +23,7 @@ app.all('*', (req, res, next) => {
 //8. errores van al controlador de errores
 app.use(globalErrorHandler)
 
+//9. go to users.model.js
+
 //1. export
 export default app
