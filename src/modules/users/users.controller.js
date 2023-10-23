@@ -1,5 +1,6 @@
 /* funciones controladoras */
 
+import generateJWT from "../../config/plugins/generate.jwt.js"
 import { catchAsync } from "../../errors/index.js"
 import { validateRegister } from "./users.schema.js"
 import { UserService } from './users.service.js'
@@ -33,8 +34,19 @@ export const registerUser = catchAsync(async (req, res, next) => {
   const user = await userService.createUser(userData)
 
   //9. go to .env
+  //10, generar e importar token
+  const token = await generateJWT(user.id)
 
-  return res.status(200).json()
+  //11.
+  return res.status(201).json({
+    token,
+    user: {
+      name: user.name,
+      email: user.email
+    },
+    user
+
+  })
 })
 
 export const updateUser = catchAsync(async (req, res, next) => {
