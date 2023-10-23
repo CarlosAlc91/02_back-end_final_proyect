@@ -1,5 +1,7 @@
 /* funciones controladoras */
 
+import { catchAsync } from "../../errors/index.js"
+
 //1. crear funciones
 
 export const loginUser = catchAsync(async (req, res, next) => {
@@ -17,3 +19,4 @@ export const deleteUser = catchAsync(async (req, res, next) => {
 })
 
 //2. go to users.routes.js and import functions
+//3. import catchAsync
