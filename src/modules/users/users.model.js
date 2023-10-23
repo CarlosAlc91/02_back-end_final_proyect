@@ -35,5 +35,6 @@ const User = sequelize.define('users', {
 
 })
 
+//4. go to users.service.js
 //3. export
 export default User
