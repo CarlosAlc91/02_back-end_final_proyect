@@ -10,4 +10,12 @@ export const encryptedPassword = async (password) => {
   return await bcrypt.hash(password, salt)
 }
 
+//4. funcion par verificar password
+export const verifyPassword = async (bodyPassword, userPassword) => {
+  return await bcrypt.compare(bodyPassword, userPassword)
+}
+
+//5. go to user.controller
+
+
 //3. ir a users.model

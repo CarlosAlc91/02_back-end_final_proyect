@@ -25,6 +25,18 @@ export class UserService {
     return await user.update({ status: true })
   }
 
+  //4 create another service
+  async findUserByEmail(email) {
+    return await User.findOne({
+      where: {
+        email,
+        status: true
+      },
+    })
+  }
+
+  //5 ir a user.controller.js
+
 }
 
 //3. go to user.schema
