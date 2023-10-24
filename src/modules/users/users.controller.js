@@ -58,6 +58,7 @@ export const loginUser = catchAsync(async (req, res, next) => {
   })
 })
 
+//22. USUARIOS TERMINADOS => SEGUIMOS CON RESTAURANTES
 
 export const registerUser = catchAsync(async (req, res, next) => {
   //4. destructurar e importar la validacion de usuarios
