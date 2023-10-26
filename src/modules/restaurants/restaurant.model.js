@@ -3,17 +3,32 @@
 import { DataTypes } from 'sequelize'
 import sequelize from '../../config/database/database.js'
 
-const ModelName = sequelize.define('modelName', {
+const Restaurant = sequelize.define('restaurants', {
   id: {
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
     type: DataTypes.INTEGER,
   },
-  field1: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false
   },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  rating: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  status: {
+    type: DataTypes.ENUM('active', 'disabled'),
+    allowNull: false,
+    defaultValue: 'active'
+  },
 })
 
-export default ModelName
+export default Restaurant
+
+//2. go to restaurants.route
