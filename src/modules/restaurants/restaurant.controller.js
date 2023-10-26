@@ -31,7 +31,7 @@ export const createRestaurants = catchAsync(async (req, res, next) => {
   })
 
   return res.status(201).json(restaurant)
-  //9. go to service
+
 })
 
 export const findOneRestaurant = catchAsync(async (req, res, next) => { })
@@ -40,7 +40,11 @@ export const updateRestaurant = catchAsync(async (req, res, next) => { })
 
 export const deleteRestaurant = catchAsync(async (req, res, next) => { })
 
-export const createRestaurantReview = catchAsync(async (req, res, next) => { })
+export const createRestaurantReview = catchAsync(async (req, res, next) => {
+  //9. go to users/auth.middleware.js
+  //10. para crear la review necesito enviar le comentario
+  const { comment, rating } = req.body
+})
 
 export const updateReview = catchAsync(async (req, res, next) => { })
 

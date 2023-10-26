@@ -11,6 +11,7 @@ import {
   updateReview,
   deleteReview
 } from './restaurant.controller.js'
+import { validateExistRestaurant } from './restaurant.middleware.js'
 
 
 export const router = express.Router()
@@ -28,7 +29,9 @@ router
   .patch(updateRestaurant)
   .delete(deleteRestaurant)
 
-router.post('/reviews/:id', createRestaurantReview)
+//5. agregar el middleware validateExistRestaurant
+router.post('/reviews/:id', validateExistRestaurant, createRestaurantReview)
+//6. go to restaurant.controller
 
 router
   .route('/reviews/:restaurantId/:id')

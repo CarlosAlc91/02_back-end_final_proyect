@@ -18,6 +18,16 @@ export class RestaurantService {
     return await Restaurant.create(data)
   }
   //7. controller
+  //8. 
+  async findOneRestaurant(id) {
+    return await Restaurant.findOne({
+      where: {
+        id,
+        status: 'active'
+      }
+    })
+  }
+  //9. go to restaurant.middleware
 }
 
 //2. ir a restaurant.controller a instanciar
