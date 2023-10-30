@@ -1,6 +1,8 @@
 //1. import
 import app from "./app.js"
+import { initModel } from "./config/database/associations.js"
 import { authentication, synchronization } from "./config/database/database.js"
+
 //5. import envs
 import { envs } from "./config/environments/environments.js"
 //2. 
@@ -9,6 +11,7 @@ async function main() {
   try {
     //3. after creating functions in db.js importing
     await authentication()
+    initModel()
     await synchronization()
   } catch (error) {
     //2. console.error

@@ -1,5 +1,6 @@
 /* funciones controladoresa */
 //1. imopr
+import { date } from 'zod'
 import { catchAsync } from '../../errors/index.js'
 import { ReviewService } from '../reviews/review.service.js'
 //4. improt service
@@ -61,7 +62,14 @@ export const createRestaurantReview = catchAsync(async (req, res, next) => {
 
 })
 
-export const updateReview = catchAsync(async (req, res, next) => { })
+export const updateReview = catchAsync(async (req, res, next) => {
+
+  const { comment, rating } = req.body
+  const { review } = req
+  const reviewUpdated = await ReviewService.updateReview(review, { comment, rating })
+
+  return res.status(200).json(reviewUpdated)
+})
 
 export const deleteReview = catchAsync(async (req, res, next) => { })
 
