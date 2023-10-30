@@ -1,6 +1,7 @@
 /* funciones controladoresa */
 //1. imopr
 import { catchAsync } from '../../errors/index.js'
+import { ReviewService } from '../reviews/review.service.js'
 //4. improt service
 import { RestaurantService } from './restaurant.service.js'
 
@@ -44,6 +45,20 @@ export const createRestaurantReview = catchAsync(async (req, res, next) => {
   //9. go to users/auth.middleware.js
   //10. para crear la review necesito enviar le comentario
   const { comment, rating } = req.body
+
+  const { id } = req.params
+
+  const { sessionUser } = req
+
+  const review = await ReviewService.create({
+    comment,
+    rating,
+    restaurantId: id,
+    userId: sessionUser.id
+  })
+
+  return res.status(201).json(review)
+
 })
 
 export const updateReview = catchAsync(async (req, res, next) => { })

@@ -35,7 +35,7 @@ export const protect = catchAsync(async (req, res, next) => {
   )
 
   //buscar el usuario utilizando el servicio example: const user = await ......
-  const user = await userService.findOneUser(decoded)
+  const user = await userService.findOneUser(decoded.id)
 
   if (!user) {
     return next(

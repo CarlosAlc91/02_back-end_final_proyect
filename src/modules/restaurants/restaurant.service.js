@@ -19,10 +19,10 @@ export class RestaurantService {
   }
   //7. controller
   //8. 
-  async findOneRestaurant(id) {
+  async findOneRestaurant(id, restaurantId) {
     return await Restaurant.findOne({
       where: {
-        id,
+        id: restaurantId || id,
         status: 'active'
       }
     })

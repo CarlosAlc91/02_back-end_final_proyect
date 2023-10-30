@@ -34,4 +34,4 @@ const Review = sequelize.define('review', {
 
 //2. go to review.service
 
-export default ModelName
+export default Review

@@ -8,11 +8,11 @@ const restaurantService = new RestaurantService()
 //2. 
 export const validateExistRestaurant = catchAsync(async (req, res, next) => {
   //3.
-  const { id } = req.params
+  const { id, restaurantId } = req.params
 
   //4. go to restaurant.service
   //5.
-  const restaurant = restaurantService.findOneRestaurant(id)
+  const restaurant = restaurantService.findOneRestaurant(id, restaurantId)
 
   //6. validacion sino existe ele restaurantr
   if (!restaurant) {
