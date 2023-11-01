@@ -7,6 +7,7 @@ import { router as userRouter } from '../modules/users/users.routes.js'
 //7. import routas de restaurants
 import { router as restaurantRouter } from '../modules/restaurants/restaurant.route.js'
 import { protect } from '../modules/users/auth.middleware.js'
+import { router as mealRouter } from '../modules/meals/meals.routes.js'
 //2. 
 export const router = express.Router()
 
@@ -21,4 +22,5 @@ router.use(protect)
 //10. por mi cuenta proteger las rutas con :id de users.route.js
 //11. go to restaurant.middleware
 router.use('/restaurants', restaurantRouter)
+router.use('/meals', mealRouter)
 //8. back to restaurant.route
