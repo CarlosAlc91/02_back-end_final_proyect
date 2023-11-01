@@ -5,11 +5,11 @@ import { deleteMeal, findAllMeals, findMealById, registerMeal, updateMeal } from
 export const router = express.Router()
 
 router
+  .post('/register', registerMeal)
   .get(findAllMeals)
 
 router
   .route('/:id')
   .get(findMealById)
-  .post(registerMeal)
   .patch(updateMeal)
   .delete(deleteMeal)

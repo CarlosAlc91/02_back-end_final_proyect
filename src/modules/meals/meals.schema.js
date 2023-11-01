@@ -13,7 +13,7 @@ const updateMealSchema = z.object({
   price: z.number()
 })
 
-const validateRegisterMeal = (data) => {
+export const validateRegisterMeal = (data) => {
   const result = registerMealSchema.safeParse(data)
 
   const {
@@ -29,7 +29,7 @@ const validateRegisterMeal = (data) => {
   }
 }
 
-const validateUpdateMeal = (data) => {
+export const validateUpdateMeal = (data) => {
   const result = updateMealSchema.safeParse(data)
 
   const {
