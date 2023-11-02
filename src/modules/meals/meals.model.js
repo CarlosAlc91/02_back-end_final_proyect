@@ -25,7 +25,7 @@ const Meals = sequelize.define('meals', {
   },
 
   status: {
-    type: DataTypes.ENUM('active', 'progress', 'completed'),
+    type: DataTypes.ENUM('active', 'inactive'),
     defaultValue: 'active',
     allowNull: false
   }
