@@ -1,0 +1,50 @@
+import { OrdersService } from './orders.service.js'
+import { AppError, catchAsync } from '../../errors/index.js'
+import { mealsService } from '../meals/meals.service.js'
+import { validateOrder } from './orders.schema.js'
+import { totalPrice } from '../../common/utils/totalPrice.js'
+import { or } from 'sequelize'
+
+export const ordersService = new OrdersService()
+
+export const findAllOrders = catchAsync(async (req, res, next) => {
+  const { sessionUser } = req
+
+  const meals = await ordersService.findAllOrders(sessionUser.id)
+
+  return res.status(201).json(meals)
+})
+
+export const createOrder = catchAsync(async (req, res, next) => {
+  const { sessionUser } = req
+
+  const {
+    hasError,
+    errorMessage,
+    orderData
+  } = validateOrder(req.body)
+
+  if (hasError) {
+    return res.status(421).json({
+      status: 'error',
+      message: errorMessage
+    })
+  }
+
+  const meal = await mealsService.findOneMeal(orderData.mealId)
+
+  if (!meal) {
+    return next(
+      new AppError(`Meal with id ${orderData.mealId} not found`, 401)
+    )
+  }
+
+  orderData.totalPrice = totalPrice(orderData.quantity, meal.price)
+
+  const order = await ordersService.createOrder({
+    ...orderData,
+    userId: sessionUser.id
+  })
+
+  return res.status(201).json(order)
+})
