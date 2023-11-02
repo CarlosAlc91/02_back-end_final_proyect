@@ -1,6 +1,5 @@
 
 import { catchAsync } from '../../errors/index.js'
-import { ReviewService } from '../reviews/review.service.js'
 import { validateRestaurant } from './restaurant.schema.js'
 import generateJWT from '../../config/plugins/generate.jwt.js'
 import { RestaurantService } from './restaurant.service.js'
@@ -70,7 +69,7 @@ export const updateRestaurant = catchAsync(async (req, res, next) => {
     restaurantData.address
   )
 
-  return res.status(201).json(updateRestaurant)
+  return res.status(201).json(updatedRestaurant)
 })
 
 export const deleteRestaurant = catchAsync(async (req, res, next) => {

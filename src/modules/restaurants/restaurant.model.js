@@ -1,5 +1,4 @@
-/* RESTAURANT MODEL */
-//1. snippet model
+
 import { DataTypes } from 'sequelize'
 import sequelize from '../../config/database/database.js'
 
@@ -30,5 +29,3 @@ const Restaurant = sequelize.define('restaurants', {
 })
 
 export default Restaurant
-
-//2. go to restaurants.route
