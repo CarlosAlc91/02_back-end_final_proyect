@@ -48,3 +48,37 @@ export const createOrder = catchAsync(async (req, res, next) => {
 
   return res.status(201).json(order)
 })
+
+
+export const updateOrder = catchAsync(async (req, res, next) => {
+  const { order } = req
+
+  const { sessionUser } = req
+
+  if (order.userId !== sessionUser.id) {
+    return next(
+      new AppError('Permission denied', 401)
+    )
+  }
+
+  await ordersService.updateOrder(order)
+
+  return res.status(201).json({
+    message: 'order completed'
+  })
+})
+
+export const deleteOrder = catchAsync(async (req, res, next) => {
+  const { order } = req
+  const { sessionUser } = req
+
+  if (order.userId !== sessionUser.id) {
+    return next(
+      new AppError('Permission denied', 401)
+    )
+  }
+
+  await ordersService.deleteOrder(order)
+
+  return res.status(201).json(null)
+})
