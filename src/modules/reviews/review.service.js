@@ -26,5 +26,9 @@ export class ReviewService {
     return await review.update(data)
   }
 
+  static async deleteReview(review) {
+    return await review.update({ status: 'deleted' })
+  }
+
   //3. go to reivew.middleware
 }
