@@ -1,15 +1,13 @@
-/* funciones controladoresa */
-//1. imopr
-import { date } from 'zod'
+
 import { catchAsync } from '../../errors/index.js'
 import { ReviewService } from '../reviews/review.service.js'
-//4. improt service
+import { validateRestaurant } from './restaurant.schema.js'
+import generateJWT from '../../config/plugins/generate.jwt.js'
 import { RestaurantService } from './restaurant.service.js'
 
-//5. instanciar service
+
 const restaurantService = new RestaurantService()
 
-//2. crear funciones controladoras
 export const findAllRestaurants = catchAsync(async (req, res, next) => {
   //5.
   const restaurants = await restaurantService.findAllRestaurants()
@@ -18,25 +16,38 @@ export const findAllRestaurants = catchAsync(async (req, res, next) => {
 })
 
 export const createRestaurants = catchAsync(async (req, res, next) => {
-  //6.
   const {
-    name,
-    address,
-    rating
-  } = req.body
-  //7. go to service.js
-  //8. 
-  const restaurant = await restaurantService.createRestaurant({
-    name,
-    address,
-    rating
+    hasError,
+    erroMessages,
+    restaurantData
+  } = validateRestaurant(req.body)
+
+  if (hasError) {
+    return res.status(421).json({
+      status: 'error',
+      message: erroMessages
+    })
+  }
+
+  const restaurant = await restaurantService.createRestaurant(restaurantData)
+
+  const token = await generateJWT(restaurantData.id)
+
+  return res.status(201).json({
+    token,
+    restaurant
   })
-
-  return res.status(201).json(restaurant)
-
 })
 
-export const findOneRestaurant = catchAsync(async (req, res, next) => { })
+export const findRestaurantById = catchAsync(async (req, res, next) => {
+  const { restaurant } = req
+  const token = await generateJWT(restaurant.id)
+  return res.status(201).json({
+    token,
+    restaurant
+  })
+
+})
 
 export const updateRestaurant = catchAsync(async (req, res, next) => { })
 
