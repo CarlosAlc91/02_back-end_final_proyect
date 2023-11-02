@@ -15,7 +15,7 @@ const Meals = sequelize.define('meals', {
   },
 
   price: {
-    type: DataTypes.DOUBLE,
+    type: DataTypes.FLOAT,
     allowNull: false
   },
 
