@@ -49,39 +49,34 @@ export const findRestaurantById = catchAsync(async (req, res, next) => {
 
 })
 
-export const updateRestaurant = catchAsync(async (req, res, next) => { })
+export const updateRestaurant = catchAsync(async (req, res, next) => {
+  const { restaurant } = req
 
-export const deleteRestaurant = catchAsync(async (req, res, next) => { })
+  const {
+    hasError,
+    erroMessages,
+    restaurantData
+  } = validateRestaurant(req.body)
 
-export const createRestaurantReview = catchAsync(async (req, res, next) => {
-  //9. go to users/auth.middleware.js
-  //10. para crear la review necesito enviar le comentario
-  const { comment, rating } = req.body
+  if (hasError) {
+    return res.status(421).json({
+      status: 'error',
+      message: erroMessages
+    })
+  }
 
-  const { id } = req.params
+  const updatedRestaurant = await restaurantService.updateRestaurant(restaurant,
+    restaurantData.name,
+    restaurantData.address
+  )
 
-  const { sessionUser } = req
-
-  const review = await ReviewService.create({
-    comment,
-    rating,
-    restaurantId: id,
-    userId: sessionUser.id
-  })
-
-  return res.status(201).json(review)
-
+  return res.status(201).json(updateRestaurant)
 })
 
-export const updateReview = catchAsync(async (req, res, next) => {
+export const deleteRestaurant = catchAsync(async (req, res, next) => {
+  const { restaurant } = req
 
-  const { comment, rating } = req.body
-  const { review } = req
-  const reviewUpdated = await ReviewService.updateReview(review, { comment, rating })
+  await restaurantService.deleteRestaurant(restaurant)
 
-  return res.status(200).json(reviewUpdated)
+  return res.status(204).json(null)
 })
-
-export const deleteReview = catchAsync(async (req, res, next) => { })
-
-//3 y 6. ir a restaurant.service
