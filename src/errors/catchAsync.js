@@ -1,4 +1,4 @@
-/* snippet */
+
 
 export const catchAsync = fn => {
   return (req, res, next) => {
@@ -6,4 +6,3 @@ export const catchAsync = fn => {
   }
 }
 
-//2. go to index.js

@@ -1,8 +1,3 @@
-/* AUTENTICACION */
-
-/* 
-TODO 1.snippet protectRoute 
-*/
 
 import { promisify } from 'util'
 import jwt from 'jsonwebtoken'
@@ -10,17 +5,14 @@ import { envs } from '../../config/environments/environments.js'
 import { UserService } from './users.service.js'
 import { catchAsync, AppError } from '../../errors/index.js'
 
-
-//instanciar servicio de usuarios
 const userService = new UserService()
 
 export const protect = catchAsync(async (req, res, next) => {
   let token
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    token = req.headers.authorization.split(' ')[1]
+  const auth = req.headers.authorization
+
+  if (auth && auth.startsWith('Bearer')) {
+    token = auth.split(' ')[1]
   }
 
   if (!token) {
@@ -34,7 +26,6 @@ export const protect = catchAsync(async (req, res, next) => {
     envs.SECRET_JWT_SEED
   )
 
-  //buscar el usuario utilizando el servicio example: const user = await ......
   const user = await userService.findOneUser(decoded.id)
 
   if (!user) {
@@ -47,8 +38,7 @@ export const protect = catchAsync(async (req, res, next) => {
   next()
 })
 
-//2.
-//TODO snippet restrictTo
+
 export const restrictTo = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.sessionUser.role)) {
@@ -61,9 +51,6 @@ export const restrictTo = (...roles) => {
   }
 }
 
-//3.
-//TODO snippet protectAccountOwner
-//importar catchAsync y AppError
 
 export const protectAccountOwner = catchAsync(async (req, res, next) => {
   const { user, sessionUser } = req
@@ -74,5 +61,3 @@ export const protectAccountOwner = catchAsync(async (req, res, next) => {
 
   next()
 })
-
-//4. go to routes/routes.js

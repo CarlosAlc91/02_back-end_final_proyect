@@ -1,8 +1,7 @@
-//1. import
+
 import jwt from 'jsonwebtoken'
 import { envs } from '../environments/environments.js'
-
-//2. 
+ 
 const generateJWT = id => {
   return new Promise((resolve, reject) => {
     const payload = { id }
@@ -24,5 +23,4 @@ const generateJWT = id => {
   })
 }
 
-//3. 
 export default generateJWT

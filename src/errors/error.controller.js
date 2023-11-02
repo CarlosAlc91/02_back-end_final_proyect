@@ -1,8 +1,8 @@
-//1. imports appError and envs
+
 import { AppError } from "./appError.js"
 import { envs } from "../config/environments/environments.js"
 
-//2. errors functions
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: 'error',
@@ -40,5 +40,3 @@ export const globalErrorHandler = (err, req, res, next) => {
     sendErrorProd(error, res)
   }
 }
-
-//3. go to app.js

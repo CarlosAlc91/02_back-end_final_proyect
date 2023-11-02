@@ -1,11 +1,11 @@
 import { OrdersService } from './orders.service.js'
 import { AppError, catchAsync } from '../../errors/index.js'
-import { mealsService } from '../meals/meals.service.js'
+import { MealsService } from '../meals/meals.service.js'
 import { validateOrder } from './orders.schema.js'
 import { totalPrice } from '../../common/utils/totalPrice.js'
-import { or } from 'sequelize'
 
 export const ordersService = new OrdersService()
+export const mealsService = new MealsService()
 
 export const findAllOrders = catchAsync(async (req, res, next) => {
   const { sessionUser } = req

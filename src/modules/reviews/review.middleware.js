@@ -1,4 +1,4 @@
-//1. import catchasync
+
 import { AppError, catchAsync } from '../../errors/index.js'
 import { ReviewService } from './review.service.js'
 import { RestaurantService } from '../restaurants/restaurant.service.js'

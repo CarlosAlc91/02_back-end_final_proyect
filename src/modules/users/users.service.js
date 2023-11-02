@@ -1,9 +1,8 @@
-//1. import user model
+
 import User from "./users.model.js"
 
-//2. export class
 export class UserService {
-  //1. create functions
+
   async createUser(data) {
     return await User.create(data)
   }
@@ -22,10 +21,9 @@ export class UserService {
   }
 
   async deleteUser(user) {
-    return await user.update({ status: true })
+    return await user.update({ status: false })
   }
 
-  //4 create another service
   async findUserByEmail(email) {
     return await User.findOne({
       where: {
@@ -35,8 +33,4 @@ export class UserService {
     })
   }
 
-  //5 ir a user.controller.js
-
 }
-
-//3. go to user.schema

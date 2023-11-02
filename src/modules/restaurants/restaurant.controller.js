@@ -8,7 +8,7 @@ import { RestaurantService } from './restaurant.service.js'
 const restaurantService = new RestaurantService()
 
 export const findAllRestaurants = catchAsync(async (req, res, next) => {
-  //5.
+  
   const restaurants = await restaurantService.findAllRestaurants()
 
   return res.status(200).json(restaurants)

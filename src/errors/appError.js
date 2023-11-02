@@ -1,4 +1,4 @@
-//1.
+
 export class AppError extends Error {
   constructor(message, statusCode) {
     super(message)
@@ -10,5 +10,3 @@ export class AppError extends Error {
     Error.captureStackTrace(this, this.constructor)
   }
 }
-
-//2. go to index.js

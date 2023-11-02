@@ -1,20 +1,17 @@
-//1. imports
-import express from 'express'
+import { Router } from 'express'
 import { deleteUser, loginUser, registerUser, updateUser } from './users.controller.js'
+import {
+  protect,
+  protectAccountOwner,
+} from './auth.middleware.js'
 
-//2. 
-export const router = express.Router()
+export const router = Router()
 
-//3. createa a route.js file
-//4. creacion de endpoints
 router.post('/login', loginUser)
 router.post('/register', registerUser)
 
-router
-  .route('/:id')
-  .patch(updateUser)
-  .delete(deleteUser)
+router.use(protect)
 
-//5. go to users.controller.js to create controller functions
-//6. import controller functions
-//7. go to errors folder and create files
+router
+  .patch('/:id', protectAccountOwner, updateUser)
+  .delete('/:id', protectAccountOwner, deleteUser)

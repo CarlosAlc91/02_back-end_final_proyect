@@ -1,4 +1,4 @@
-//1. model snippet
+
 import { DataTypes } from 'sequelize'
 import sequelize from '../../config/database/database.js'
 
@@ -31,7 +31,5 @@ const Review = sequelize.define('review', {
     defaultValue: 'active'
   }
 })
-
-//2. go to review.service
 
 export default Review
