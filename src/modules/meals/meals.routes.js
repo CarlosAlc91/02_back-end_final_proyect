@@ -1,11 +1,11 @@
-import express from 'express'
+import { Router } from 'express'
 import { deleteMeal, findAllMeals, findMealById, registerMeal, updateMeal } from './meals.controller.js'
 import { validateExistRestaurant } from '../restaurants/restaurant.middleware.js'
 import { validateExistMeal } from './meals.middleware.js'
 import { protect, restrictTo } from '../users/auth.middleware.js'
 
 
-export const router = express.Router()
+export const router = Router()
 
 router
   .get('/', findAllMeals)

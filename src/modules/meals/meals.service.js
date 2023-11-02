@@ -1,9 +1,19 @@
 import Meals from "./meals.model.js"
+import Restaurant from '../restaurants/restaurant.model.js'
 
 export class MealsService {
   async findAllMeals(data) {
-    return await Meals.findAll(data)
+    return await Meals.findAll({
+      where: {
+        status: true
+      },
+      include: [{
+        model: Restaurant,
+        as: 'mealsFromRestaurant'
+      }]
+    })
   }
+
   async createMeal(data) {
     return await Meals.create(data)
   }
@@ -13,7 +23,11 @@ export class MealsService {
       where: {
         id,
         status: true
-      }
+      },
+      include: [{
+        model: Restaurant,
+        as: 'mealsFromRestaurant'
+      }]
     })
   }
 
@@ -22,6 +36,6 @@ export class MealsService {
   }
 
   async deleteMeal(meal) {
-    return await meal.update({ status: true })
+    return await meal.update({ status: false })
   }
 }
